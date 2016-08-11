@@ -8,6 +8,8 @@ Readme and installation guide can be found here: https://github.com/magespeciali
 ## Installing on Magento 1:
 Please refer to this page: https://github.com/magespecialist/mage-chrome-toolbar#installing-on-magento-1
 
+## Some screenshot
+
 #### Theme, Controller and Global information: 
 <img src="https://raw.githubusercontent.com/magespecialist/mage-chrome-toolbar/master/screenshots/1.png" width="480" />
 
