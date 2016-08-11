@@ -6,11 +6,7 @@ Readme and installation guide can be found here: https://github.com/magespeciali
 > This module is also available for **Magento 2**: https://github.com/magespecialist/m2-MSP_DevTools/
 
 ## Installing on Magento 1:
-* Download this module and unzip in the Magento root.
-* Flush your cache.
-* Open Magento backend and go to `System > Configuration > MageSpecialist > DevTools`.
-* Enable devtools and set IP restrictions.
-* Optionally download PhpStorm **Remote Call Plugin** if you wish to integrate PhpStorm.
+Please refer to this page: https://github.com/magespecialist/mage-chrome-toolbar#installing-on-magento-1
 
 #### Theme, Controller and Global information: 
 <img src="https://raw.githubusercontent.com/magespecialist/mage-chrome-toolbar/master/screenshots/1.png" width="480" />
