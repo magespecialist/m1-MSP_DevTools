@@ -44,7 +44,13 @@
                     <show_in_default>1</show_in_default>
                     <show_in_website>1</show_in_website>
                     <show_in_store>1</show_in_store>
-
+                    <comment><![CDATA[
+                        <div class="msp_devtools-general-comment">
+                            This module requires <strong><a target="_blank" href="https://chrome.google.com/webstore/detail/magespecialist-devtools-f/odbnbnenehdodpnebgldhhmicbnlmapj?authuser=3">MageSpecialist Chrome DevTools</a></strong> to be installed in your Chrome browser.<br />
+                            <a target="_blank" href="https://chrome.google.com/webstore/detail/magespecialist-devtools-f/odbnbnenehdodpnebgldhhmicbnlmapj?authuser=3">Click here</a> to install it from Chrome WebStore.<br />
+                            Source code, installation and configuration guide: <a target="_blank" href="https://github.com/magespecialist/mage-chrome-toolbar">https://github.com/magespecialist/mage-chrome-toolbar</a>.
+                        </div>
+                    ]]></comment>
                     <fields>
                         <enabled translate="label">
                             <label>Enabled</label>
@@ -54,6 +60,7 @@
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
+
                         </enabled>
                         <authorized_ranges translate="label">
                             <label>Authorized IP list</label>
@@ -73,6 +80,9 @@
                     <show_in_default>1</show_in_default>
                     <show_in_website>1</show_in_website>
                     <show_in_store>1</show_in_store>
+                    <comment><![CDATA[
+                        <strong>NOTE:</strong> You need to install <strong>Remote Call</strong> Plugin in your PhpStorm.
+                    ]]></comment>
                     <fields>
                         <enabled translate="label">
                             <label>Enabled</label>
