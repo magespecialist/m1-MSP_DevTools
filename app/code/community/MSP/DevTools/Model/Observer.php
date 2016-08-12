@@ -18,12 +18,6 @@
  * @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  */
 
-// @codingStandardsIgnoreStart
-require_once(
-    BP.DS.'app'.DS.'code'.DS.'community'.DS.'MSP'.DS.'DevTools'.DS.'libs'.DS.'phpquery'.DS.'phpQuery'.DS.'phpQuery.php'
-);
-// @codingStandardsIgnoreEnd
-
 class MSP_DevTools_Model_Observer
 {
     /**
@@ -38,16 +32,8 @@ class MSP_DevTools_Model_Observer
             return $html;
         }
 
-        try {
-            $doc = \phpQuery::newDocumentHTML($html);
-
-            $children = $doc->find('> *:not([data-mspdevtools])');
-            $children->attr('data-mspdevtools', $blockId);
-            $html = $doc->html();
-        } catch (\Exception $e) {
-            return $html;
-        }
-
+        $html = '<!-- MSPDEVTOOLS[' . $blockId . '] -->' . $html . '<!-- /MSPDEVTOOLS[' . $blockId . '] -->';
+        
         return $html;
     }
     
