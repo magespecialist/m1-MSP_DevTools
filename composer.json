@@ -1,0 +1,8 @@
+{
+  "name": "magespecialist/m1-MSP_DevTools",
+  "type":"magento-module",
+  "require": {
+    "php": ">=5.5",
+    "magento-hackathon/magento-composer-installer": "*"
+  }
+}
