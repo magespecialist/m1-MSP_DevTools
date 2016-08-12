@@ -8,6 +8,8 @@ Readme and installation guide can be found here: https://github.com/magespeciali
 ## Installing on Magento 1:
 Please refer to this page: https://github.com/magespecialist/mage-chrome-toolbar#installing-on-magento-1
 
+or simply require magespecialist/m1-MSP_DevTools in your composer.json
+
 ## Some screenshot
 
 #### Theme, Controller and Global information: 
