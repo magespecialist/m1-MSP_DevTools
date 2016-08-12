@@ -1,0 +1,29 @@
+{
+  "name": "msp/devtools-m1",
+  "description": "MageSpecialist DevTools for Magento 1",
+  "type": "magento-module",
+  "license": "OSL 3.0",
+  "support": {
+    "issues": "https://github.com/magespecialist/m1-MSP_DevTools/issues"
+  },
+  "homepage": "https://github.com/magespecialist/m1-MSP_DevTools",
+  "keywords": [
+    "magento",
+    "development",
+    "tool"
+  ],
+  "authors": [
+    {
+      "name": "MageSpecialist",
+      "email": "info@magespecialist.it"
+    }
+  ],
+  "require": {
+    "magento-hackathon/magento-composer-installer": "*"
+  },
+  "extra": {
+    "branch-alias": {
+      "dev-master": "1.0.x-dev"
+    }
+  }
+}
