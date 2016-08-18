@@ -113,6 +113,7 @@ class MSP_DevTools_Model_PageInfo
             ),
             'blocks' => Mage::getSingleton('msp_devtools/elementRegistry')->getRegisteredOps(),
             'profiler' => $this->_getProfilerInfo(),
+            'events' => Mage::getSingleton('msp_devtools/eventRegistry')->getRegisteredOps(),
             'version' => 1,
         );
 

@@ -33,7 +33,7 @@ class MSP_DevTools_Model_Observer
         }
 
         $html = '<!-- MSPDEVTOOLS[' . $blockId . '] -->' . $html . '<!-- /MSPDEVTOOLS[' . $blockId . '] -->';
-        
+
         return $html;
     }
     
@@ -51,6 +51,10 @@ class MSP_DevTools_Model_Observer
     public function coreBlockAbstractToHtmlAfter($event)
     {
         if (!Mage::helper('msp_devtools')->isActive()) {
+            return;
+        }
+
+        if (Mage::helper('msp_devtools')->isAjax()) {
             return;
         }
 
@@ -95,7 +99,12 @@ class MSP_DevTools_Model_Observer
             return;
         }
 
+        if (Mage::helper('msp_devtools')->isAjax()) {
+            return;
+        }
+
         Mage::getSingleton('msp_devtools/elementRegistry')->calcTimers();
+        Mage::getSingleton('msp_devtools/eventRegistry')->calcTimers();
 
         Varien_Profiler::stop('DISPATCH EVENT:http_response_send_before');
 

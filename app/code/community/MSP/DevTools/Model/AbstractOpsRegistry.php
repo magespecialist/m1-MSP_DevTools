@@ -70,7 +70,7 @@ abstract class MSP_DevTools_Model_AbstractOpsRegistry
     {
         $lastOp = $this->stackOps[count($this->stackOps) - 1];
         if ($opName != $lastOp) {
-            throw new \Exception('Invalido operation nesting');
+            return $this;
         }
 
         $opId = $this->getOpId();

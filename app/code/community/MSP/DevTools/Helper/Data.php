@@ -26,8 +26,9 @@ class MSP_DevTools_Helper_Data extends Mage_Core_Helper_Abstract
     const XML_PATH_PHPSTORM_ENABLED = 'msp_devtools/phpstorm/enabled';
     const XML_PATH_PHPSTORM_PORT = 'msp_devtools/phpstorm/port';
 
-    protected $scopeConfigInterface;
-    protected $remoteAddress;
+    protected $_scopeConfigInterface;
+    protected $_remoteAddress;
+    protected $_isAjax = null;
 
     /**
      * Return true if phpstorm integration is enabled
@@ -139,5 +140,18 @@ class MSP_DevTools_Helper_Data extends Mage_Core_Helper_Abstract
         }
 
         return false;
+    }
+
+    /**
+     * Return true if response contains html
+     * @return null
+     */
+    public function isAjax()
+    {
+        if (is_null($this->_isAjax)) {
+            $this->_isAjax = strtolower(Mage::app()->getRequest()->getHeader('x-requested-with')) == 'xmlhttprequest';
+        }
+
+        return $this->_isAjax;
     }
 }
