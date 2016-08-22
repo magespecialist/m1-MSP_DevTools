@@ -1,5 +1,5 @@
 app/code/community/Varien/Profiler.php app/code/community/Varien/Profiler.php
 app/code/community/MSP/DevTools app/code/community/MSP/DevTools
-app/design/adminhtml/default/default/msp_devtools.xml   app/design/adminhtml/default/default/msp_devtools.xml
+app/design/adminhtml/default/default/layout/msp_devtools.xml   app/design/adminhtml/default/default/layout/msp_devtools.xml
 app/etc/modules/MSP_DevTools.xml    app/etc/modules/MSP_DevTools.xml
 skin/adminhtml/default/default/msp_devtools skin/adminhtml/default/default/msp_devtools
