@@ -93,7 +93,7 @@ class Varien_Profiler
     }
 
     // MSP HACK: Start
-    protected function _getEventRegistry()
+    protected static function _getEventRegistry()
     {
         if (!self::$_eventRegistry) {
             $singletonKey = '_singleton/msp_devtools/eventRegistry';
