@@ -138,6 +138,12 @@ abstract class MSP_DevTools_Model_AbstractOpsRegistry
             $registeredOp['time'] = intval(1000 * $registeredOp['time']);
         }
 
+        foreach ($this->registeredOps as $opId => $registeredOp) {
+            if (!$registeredOp['name']) {
+                unset($this->registeredOps[$opId]);
+            }
+        }
+
         return $this;
     }
 }
