@@ -65,6 +65,7 @@ class MSP_DevTools_Model_Observer
         $name = $block->getNameInLayout();
         $transport = $event->getEvent()->getTransport();
 
+        $templateFile = null;
         if ($block->getTemplateFile()) {
             $templateFile = 'app/design/' . $block->getTemplateFile();
         }
