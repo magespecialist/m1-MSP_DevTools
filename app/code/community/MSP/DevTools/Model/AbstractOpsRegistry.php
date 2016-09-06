@@ -68,6 +68,10 @@ abstract class MSP_DevTools_Model_AbstractOpsRegistry
      */
     public function stop($opName, $payload = array())
     {
+        if (count($this->stackOps) < 1) {
+            return $this;
+        }
+
         $lastOp = $this->stackOps[count($this->stackOps) - 1];
         if ($opName != $lastOp) {
             return $this;
