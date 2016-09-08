@@ -32,7 +32,6 @@ class Varien_Profiler
     // MSP HACK: Start
     static private $_stack = array();
     static private $_eventRegistry = null;
-    static private $_helper = null;
     // MSP HACK: End
 
     /**
@@ -67,7 +66,7 @@ class Varien_Profiler
     }
 
     // MSP HACK: Start
-    public function getTimerId($stack = null)
+    public static function getTimerId($stack = null)
     {
         if (is_null($stack)) {
             $stack = self::$_stack;
@@ -199,7 +198,7 @@ class Varien_Profiler
         self::pause($timerName);
     }
 
-    public static function fetch($timerName, $key='sum')
+    public static function fetch($timerName, $key = 'sum')
     {
         if (empty(self::$_timers[$timerName])) {
             return false;
@@ -247,13 +246,14 @@ class Varien_Profiler
      * Output SQl Zend_Db_Profiler
      *
      */
-    public static function getSqlProfiler($res) {
-        if(!$res){
+    public static function getSqlProfiler($res)
+    {
+        if (!$res) {
             return '';
         }
         $out = '';
         $profiler = $res->getProfiler();
-        if($profiler->getEnabled()) {
+        if ($profiler->getEnabled()) {
             $totalTime    = $profiler->getTotalElapsedSecs();
             $queryCount   = $profiler->getTotalNumQueries();
             $longestTime  = 0;

@@ -22,7 +22,7 @@
 <config>
     <modules>
         <MSP_DevTools>
-            <version>0.1.9</version>
+            <version>0.1.10</version>
         </MSP_DevTools>
     </modules>
     <global>
