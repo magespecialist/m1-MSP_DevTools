@@ -16,16 +16,16 @@ Please refer to this page: https://github.com/magespecialist/mage-chrome-toolbar
 [![general](screenshoots/m1-general-tab.png)](screenshoots/m1-general-tab.png)
 
 #### Design informations: 
-[![design](screenshoots/m1-general-tab.png)](screenshoots/m1-design-tab.png)
+[![design](screenshoots/m1-design-tab.png)](screenshoots/m1-design-tab.png)
 
 #### Observers informations:
-[![observers](screenshoots/m1-general-tab.png)](screenshoots/m1-observers-tab.png)
+[![observers](screenshoots/m1-observers-tab.png)](screenshoots/m1-observers-tab.png)
 
 #### Block informations:
-[![block](screenshoots/m1-general-tab.png)](screenshoots/m1-blocks-tab.png)
+[![block](screenshoots/m1-blocks-tab.png)](screenshoots/m1-blocks-tab.png)
 
 #### Profiler information:
-[![profiler](screenshoots/m1-general-tab.png)](screenshoots/m1-profiler-tab.png)
+[![profiler](screenshoots/m1-profiler-tab.png)](screenshoots/m1-profiler-tab.png)
 
 #### Inspector integration
 <img src="https://raw.githubusercontent.com/magespecialist/mage-chrome-toolbar/master/screenshots/main2.png" width="480" />
