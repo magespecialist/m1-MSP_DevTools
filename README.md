@@ -28,4 +28,4 @@ Please refer to this page: https://github.com/magespecialist/mage-chrome-toolbar
 [![profiler](screenshoots/m1-profiler-tab.png)](screenshoots/m1-profiler-tab.png)
 
 #### Inspector integration
-<img src="https://raw.githubusercontent.com/magespecialist/mage-chrome-toolbar/master/screenshots/main2.png" width="480" />
+[![inspector](screenshoots/m1-inspector-tab.png)](screenshoots/m1-inspector-tab.png)
