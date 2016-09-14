@@ -149,7 +149,13 @@ class MSP_DevTools_Helper_Data extends Mage_Core_Helper_Abstract
     public function isAjax()
     {
         if (is_null($this->_isAjax)) {
-            $this->_isAjax = strtolower(Mage::app()->getRequest()->getHeader('x-requested-with')) == 'xmlhttprequest';
+            $requestWith = strtolower(Mage::app()->getRequest()->getHeader('x-requested-with'));
+
+            if (($requestWith == 'xmlhttprequest') || (strpos($requestWith, 'shockwaveflash') !== false)) {
+                $this->_isAjax = true;
+            } else {
+                $this->_isAjax = false;
+            }
         }
 
         return $this->_isAjax;
