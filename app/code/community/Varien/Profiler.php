@@ -78,6 +78,10 @@ class Varien_Profiler
 
     protected static function _getObservers($area, $eventName)
     {
+        if (!Mage::app()->getConfig()->getNode($area)) {
+            return array();
+        }
+
         $observers = array();
         $observersConfig = Mage::app()->getConfig()->getEventConfig($area, $eventName);
 
