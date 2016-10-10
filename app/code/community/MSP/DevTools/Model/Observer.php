@@ -54,7 +54,7 @@ class MSP_DevTools_Model_Observer
             return;
         }
 
-        if (Mage::helper('msp_devtools')->isAjax()) {
+        if (Mage::helper('msp_devtools')->doNotAddJs()) {
             return;
         }
 
@@ -100,7 +100,7 @@ class MSP_DevTools_Model_Observer
             return;
         }
 
-        if (Mage::helper('msp_devtools')->isAjax()) {
+        if (Mage::helper('msp_devtools')->doNotAddJs()) {
             return;
         }
 

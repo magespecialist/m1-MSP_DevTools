@@ -28,7 +28,7 @@ class MSP_DevTools_Helper_Data extends Mage_Core_Helper_Abstract
 
     protected $_scopeConfigInterface;
     protected $_remoteAddress;
-    protected $_isAjax = null;
+    protected $_doNotAddJs = null;
 
     /**
      * Return true if phpstorm integration is enabled
@@ -146,18 +146,29 @@ class MSP_DevTools_Helper_Data extends Mage_Core_Helper_Abstract
      * Return true if response contains html
      * @return null
      */
-    public function isAjax()
+    public function doNotAddJs()
     {
-        if (is_null($this->_isAjax)) {
-            $requestWith = strtolower(Mage::app()->getRequest()->getHeader('x-requested-with'));
+        if (is_null($this->_doNotAddJs)) {
+            $this->_doNotAddJs = false;
 
-            if (($requestWith == 'xmlhttprequest') || (strpos($requestWith, 'shockwaveflash') !== false)) {
-                $this->_isAjax = true;
-            } else {
-                $this->_isAjax = false;
+            $requestWith = strtolower(Mage::app()->getRequest()->getHeader('x-requested-with'));
+            $responseHeaders = Mage::app()->getResponse()->getHeaders();
+
+            foreach ($responseHeaders as $responseHeader) {
+                if ((strtolower($responseHeader['name']) == 'content-type') &&
+                    (strpos($responseHeader['value'], 'text/html') === false)
+                ) {
+                    $this->_doNotAddJs = true;
+                }
+            }
+
+            if (!$this->_doNotAddJs) {
+                if (($requestWith == 'xmlhttprequest') || (strpos($requestWith, 'shockwaveflash') !== false)) {
+                    $this->_doNotAddJs = true;
+                }
             }
         }
 
-        return $this->_isAjax;
+        return $this->_doNotAddJs;
     }
 }
