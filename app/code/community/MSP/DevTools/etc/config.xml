@@ -22,7 +22,7 @@
 <config>
     <modules>
         <MSP_DevTools>
-            <version>0.1.13</version>
+            <version>0.1.14</version>
         </MSP_DevTools>
     </modules>
     <global>
@@ -82,8 +82,10 @@
         <msp_devtools>
             <general>
                 <enabled>0</enabled>
+                <authorized_ranges>0.0.0.0/0</authorized_ranges>
             </general>
             <phpstorm>
+                <enabled>0</enabled>
                 <port>8091</port>
             </phpstorm>
         </msp_devtools>
