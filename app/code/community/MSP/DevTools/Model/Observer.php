@@ -28,7 +28,7 @@ class MSP_DevTools_Model_Observer
      */
     protected function _injectHtmlAttribute($html, $blockId)
     {
-        if (!$html) {
+        if (!Mage::helper('msp_devtools')->canInjectCode()) {
             return $html;
         }
 
@@ -36,7 +36,7 @@ class MSP_DevTools_Model_Observer
 
         return $html;
     }
-    
+
     public function coreBlockAbstractToHtmlBefore($event)
     {
         $elementRegistry = Mage::getSingleton('msp_devtools/elementRegistry');
@@ -50,11 +50,7 @@ class MSP_DevTools_Model_Observer
 
     public function coreBlockAbstractToHtmlAfter($event)
     {
-        if (!Mage::helper('msp_devtools')->isActive()) {
-            return;
-        }
-
-        if (Mage::helper('msp_devtools')->doNotAddJs()) {
+        if (!Mage::helper('msp_devtools')->canInjectCode()) {
             return;
         }
 
@@ -96,11 +92,7 @@ class MSP_DevTools_Model_Observer
 
     public function httpResponseSendBefore($event)
     {
-        if (!Mage::helper('msp_devtools')->isActive()) {
-            return;
-        }
-
-        if (Mage::helper('msp_devtools')->doNotAddJs()) {
+        if (!Mage::helper('msp_devtools')->canInjectCode()) {
             return;
         }
 

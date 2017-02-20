@@ -28,7 +28,8 @@ class MSP_DevTools_Helper_Data extends Mage_Core_Helper_Abstract
 
     protected $_scopeConfigInterface;
     protected $_remoteAddress;
-    protected $_doNotAddJs = null;
+    protected $_canInjectCode = null;
+    protected $_isPaused = false;
 
     /**
      * Return true if phpstorm integration is enabled
@@ -143,13 +144,46 @@ class MSP_DevTools_Helper_Data extends Mage_Core_Helper_Abstract
     }
 
     /**
-     * Return true if response contains html
+     * Pause MSP DevTools
+     * @return $this
+     */
+    public function pause()
+    {
+        $this->_isPaused = true;
+        return $this;
+    }
+
+    /**
+     * Resume MSP DevTools
+     * @return $this
+     */
+    public function resume()
+    {
+        $this->_isPaused = false;
+        return $this;
+    }
+
+    /**
+     * Return true if paused
+     * @return bool
+     */
+    public function isPaused()
+    {
+        return $this->_isPaused;
+    }
+
+    /**
+     * Return true if can inject devtools code
      * @return null
      */
-    public function doNotAddJs()
+    public function canInjectCode()
     {
-        if (is_null($this->_doNotAddJs)) {
-            $this->_doNotAddJs = false;
+        if (!$this->isActive() || $this->isPaused()) {
+            return false;
+        }
+
+        if (is_null($this->_canInjectCode)) {
+            $this->_canInjectCode = false;
 
             $requestWith = strtolower(Mage::app()->getRequest()->getHeader('x-requested-with'));
             $responseHeaders = Mage::app()->getResponse()->getHeaders();
@@ -158,17 +192,17 @@ class MSP_DevTools_Helper_Data extends Mage_Core_Helper_Abstract
                 if ((strtolower($responseHeader['name']) == 'content-type') &&
                     (strpos($responseHeader['value'], 'text/html') === false)
                 ) {
-                    $this->_doNotAddJs = true;
+                    $this->_canInjectCode = true;
                 }
             }
 
-            if (!$this->_doNotAddJs) {
+            if (!$this->_canInjectCode) {
                 if (($requestWith == 'xmlhttprequest') || (strpos($requestWith, 'shockwaveflash') !== false)) {
-                    $this->_doNotAddJs = true;
+                    $this->_canInjectCode = true;
                 }
             }
         }
 
-        return $this->_doNotAddJs;
+        return $this->_canInjectCode;
     }
 }
