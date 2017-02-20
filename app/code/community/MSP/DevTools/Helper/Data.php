@@ -178,27 +178,31 @@ class MSP_DevTools_Helper_Data extends Mage_Core_Helper_Abstract
      */
     public function canInjectCode()
     {
-        if (!$this->isActive() || $this->isPaused()) {
+        // This must be outside the next if because it can be temporary
+        if ($this->isPaused()) {
             return false;
         }
 
         if (is_null($this->_canInjectCode)) {
             $this->_canInjectCode = false;
 
-            $requestWith = strtolower(Mage::app()->getRequest()->getHeader('x-requested-with'));
-            $responseHeaders = Mage::app()->getResponse()->getHeaders();
+            if ($this->isActive()) {
+                $requestWith = strtolower(Mage::app()->getRequest()->getHeader('x-requested-with'));
+                $responseHeaders = Mage::app()->getResponse()->getHeaders();
 
-            foreach ($responseHeaders as $responseHeader) {
-                if ((strtolower($responseHeader['name']) == 'content-type') &&
-                    (strpos($responseHeader['value'], 'text/html') === false)
-                ) {
-                    $this->_canInjectCode = true;
+                foreach ($responseHeaders as $responseHeader) {
+                    if (
+                        (strtolower($responseHeader['name']) == 'content-type') &&
+                        (strpos($responseHeader['value'], 'text/html') !== false)
+                    ) {
+                        $this->_canInjectCode = true;
+                    }
                 }
-            }
 
-            if (!$this->_canInjectCode) {
-                if (($requestWith == 'xmlhttprequest') || (strpos($requestWith, 'shockwaveflash') !== false)) {
-                    $this->_canInjectCode = true;
+                if (!$this->_canInjectCode) {
+                    if (($requestWith == 'xmlhttprequest') || (strpos($requestWith, 'shockwaveflash') !== false)) {
+                        $this->_canInjectCode = false;
+                    }
                 }
             }
         }
