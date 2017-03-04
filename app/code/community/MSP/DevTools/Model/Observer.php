@@ -28,7 +28,7 @@ class MSP_DevTools_Model_Observer
      */
     protected function _injectHtmlAttribute($html, $blockId)
     {
-        if (!$html) {
+        if (!Mage::helper('msp_devtools')->canInjectCode()) {
             return $html;
         }
 
@@ -50,11 +50,7 @@ class MSP_DevTools_Model_Observer
 
     public function coreBlockAbstractToHtmlAfter($event)
     {
-        if (!Mage::helper('msp_devtools')->isActive()) {
-            return;
-        }
-
-        if (Mage::helper('msp_devtools')->doNotAddJs()) {
+        if (!Mage::helper('msp_devtools')->canInjectCode()) {
             return;
         }
 
@@ -76,6 +72,7 @@ class MSP_DevTools_Model_Observer
             'cache_key' => $block->getCacheKey(),
             'cache_key_info' => $block->getCacheKeyInfo(),
             'module' => $block->getModuleName(),
+            'phpstorm_links' => [],
         );
 
         if ($templateFile) {
@@ -84,7 +81,23 @@ class MSP_DevTools_Model_Observer
             $phpStormUrl = Mage::helper('msp_devtools')->getPhpStormUrl($templateFile);
             if ($phpStormUrl) {
                 $payload['phpstorm_url'] = $phpStormUrl;
+
+                $payload['phpstorm_links'][] = [
+                    'key' => 'Template File',
+                    'file' => $templateFile,
+                    'link' => $phpStormUrl,
+                ];
             }
+        }
+
+        $classFile = Mage::helper('msp_devtools')->resolveClassFile(get_class($block));
+        $phpStormUrl = Mage::helper('msp_devtools')->getPhpStormUrl($classFile);
+        if ($classFile) {
+            $payload['phpstorm_links'][] = [
+                'key' => 'Block Class',
+                'file' => $classFile,
+                'link' => $phpStormUrl,
+            ];
         }
 
         $blockId = $elementRegistry->getOpId();
@@ -96,11 +109,7 @@ class MSP_DevTools_Model_Observer
 
     public function httpResponseSendBefore($event)
     {
-        if (!Mage::helper('msp_devtools')->isActive()) {
-            return;
-        }
-
-        if (Mage::helper('msp_devtools')->doNotAddJs()) {
+        if (!Mage::helper('msp_devtools')->canInjectCode()) {
             return;
         }
 

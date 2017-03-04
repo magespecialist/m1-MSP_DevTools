@@ -28,7 +28,8 @@ class MSP_DevTools_Helper_Data extends Mage_Core_Helper_Abstract
 
     protected $_scopeConfigInterface;
     protected $_remoteAddress;
-    protected $_doNotAddJs = null;
+    protected $_canInjectCode = null;
+    protected $_isPaused = false;
 
     /**
      * Return true if phpstorm integration is enabled
@@ -59,7 +60,7 @@ class MSP_DevTools_Helper_Data extends Mage_Core_Helper_Abstract
      */
     public function getPhpStormUrl($file)
     {
-        if (!$this->getPhpStormEnabled()) {
+        if (!$this->getPhpStormEnabled() || !$file) {
             return null;
         }
 
@@ -143,32 +144,91 @@ class MSP_DevTools_Helper_Data extends Mage_Core_Helper_Abstract
     }
 
     /**
-     * Return true if response contains html
+     * Resolve a Magento class path by fail ename
+     * @param string $className
+     * @return string
+     */
+    public function resolveClassFile($className)
+    {
+        $varienIo = new Varien_Io_File();
+        $classFile = str_replace(' ', DIRECTORY_SEPARATOR, ucwords(str_replace('_', ' ', $className)));
+
+        $pools = ['local', 'community', 'core'];
+        foreach ($pools as $pool) {
+            $file = 'app' . DS . 'code' . DS . $pool . DS . $classFile . '.php';
+
+            if ($varienIo->fileExists(BP . DS . $file)) {
+                return $file;
+            }
+        }
+
+        return null;
+    }
+
+    /**
+     * Pause MSP DevTools
+     * @return $this
+     */
+    public function pause()
+    {
+        $this->_isPaused = true;
+        return $this;
+    }
+
+    /**
+     * Resume MSP DevTools
+     * @return $this
+     */
+    public function resume()
+    {
+        $this->_isPaused = false;
+        return $this;
+    }
+
+    /**
+     * Return true if paused
+     * @return bool
+     */
+    public function isPaused()
+    {
+        return $this->_isPaused;
+    }
+
+    /**
+     * Return true if can inject devtools code
      * @return null
      */
-    public function doNotAddJs()
+    public function canInjectCode()
     {
-        if (is_null($this->_doNotAddJs)) {
-            $this->_doNotAddJs = false;
+        // This must be outside the next if because it can be temporary
+        if ($this->isPaused()) {
+            return false;
+        }
 
-            $requestWith = strtolower(Mage::app()->getRequest()->getHeader('x-requested-with'));
-            $responseHeaders = Mage::app()->getResponse()->getHeaders();
+        if (is_null($this->_canInjectCode)) {
+            $this->_canInjectCode = false;
 
-            foreach ($responseHeaders as $responseHeader) {
-                if ((strtolower($responseHeader['name']) == 'content-type') &&
-                    (strpos($responseHeader['value'], 'text/html') === false)
-                ) {
-                    $this->_doNotAddJs = true;
+            if ($this->isActive()) {
+                $requestWith = strtolower(Mage::app()->getRequest()->getHeader('x-requested-with'));
+                $responseHeaders = Mage::app()->getResponse()->getHeaders();
+
+                foreach ($responseHeaders as $responseHeader) {
+                    if (
+                        (strtolower($responseHeader['name']) == 'content-type') &&
+                        (strpos($responseHeader['value'], 'text/html') !== false)
+                    ) {
+                        $this->_canInjectCode = true;
+                    }
                 }
-            }
 
-            if (!$this->_doNotAddJs) {
-                if (($requestWith == 'xmlhttprequest') || (strpos($requestWith, 'shockwaveflash') !== false)) {
-                    $this->_doNotAddJs = true;
+                if (!$this->_canInjectCode) {
+                    if (($requestWith == 'xmlhttprequest') || (strpos($requestWith, 'shockwaveflash') !== false)) {
+                        $this->_canInjectCode = false;
+                    }
                 }
             }
         }
 
-        return $this->_doNotAddJs;
+        return $this->_canInjectCode;
     }
 }
