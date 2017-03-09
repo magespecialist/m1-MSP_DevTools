@@ -221,7 +221,7 @@ class MSP_DevTools_Helper_Data extends Mage_Core_Helper_Abstract
                     }
                 }
 
-                if (!$this->_canInjectCode) {
+                if ($this->_canInjectCode) {
                     if (($requestWith == 'xmlhttprequest') || (strpos($requestWith, 'shockwaveflash') !== false)) {
                         $this->_canInjectCode = false;
                     }
