@@ -195,6 +195,17 @@ class MSP_DevTools_Helper_Data extends Mage_Core_Helper_Abstract
     }
 
     /**
+     * Return a list of actions that should be excluded
+     * @return array
+     */
+    public function getBlackListedActions()
+    {
+        return array(
+            'adminhtml/catalog_product_gallery/upload',
+        );
+    }
+
+    /**
      * Return true if can inject devtools code
      * @return null
      */
@@ -205,11 +216,19 @@ class MSP_DevTools_Helper_Data extends Mage_Core_Helper_Abstract
             return false;
         }
 
+        $request = Mage::app()->getRequest();
+        $actionName = Mage::getDesign()->getArea() . '/' .
+            $request->getControllerName() . '/' . $request->getActionName();
+
+        if (in_array($actionName, $this->getBlackListedActions())) {
+            return false;
+        }
+
         if (is_null($this->_canInjectCode)) {
             $this->_canInjectCode = false;
 
             if ($this->isActive()) {
-                $requestWith = strtolower(Mage::app()->getRequest()->getHeader('x-requested-with'));
+                $requestWith = strtolower($request->getHeader('x-requested-with'));
                 $responseHeaders = Mage::app()->getResponse()->getHeaders();
 
                 foreach ($responseHeaders as $responseHeader) {

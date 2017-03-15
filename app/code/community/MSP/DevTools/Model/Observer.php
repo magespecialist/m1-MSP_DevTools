@@ -28,7 +28,7 @@ class MSP_DevTools_Model_Observer
      */
     protected function _injectHtmlAttribute($html, $blockId)
     {
-        if (!Mage::helper('msp_devtools')->canInjectCode()) {
+        if (!Mage::helper('msp_devtools')->canInjectCode() || !$html) {
             return $html;
         }
 
