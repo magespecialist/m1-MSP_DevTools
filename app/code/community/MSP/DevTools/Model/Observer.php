@@ -128,6 +128,7 @@ class MSP_DevTools_Model_Observer
         foreach ($pageInfo as $key => $info) {
             $pageInfoHtml.='window.mspDevTools["' . $key . '"] = ' . Mage::helper('core')->jsonEncode($info) . ';';
         }
+        $pageInfoHtml.='window.mspDevTools["_protocol"] = ' . MSP_DevTools_Helper_Data::PROTOCOL_VERSION . ';';
         $pageInfoHtml.= '</script>';
 
         $response->appendBody($pageInfoHtml);
