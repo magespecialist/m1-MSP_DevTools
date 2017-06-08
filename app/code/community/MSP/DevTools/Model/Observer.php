@@ -32,7 +32,7 @@ class MSP_DevTools_Model_Observer
             return $html;
         }
 
-        $html = '<!-- MSPDEVTOOLS[' . $blockId . '] -->' . $html . '<!-- /MSPDEVTOOLS[' . $blockId . '] -->';
+        $html = '<!-- START[' . $blockId . '] -->' . $html . '<!-- /END[' . $blockId . '] -->';
 
         return $html;
     }
