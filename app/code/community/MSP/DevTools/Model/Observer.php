@@ -24,15 +24,17 @@ class MSP_DevTools_Model_Observer
      * Inject data-* attribute into html document
      * @param $html
      * @param $blockId
+     * @param $name
      * @return string
      */
-    protected function _injectHtmlAttribute($html, $blockId)
+    protected function _injectHtmlAttribute($html, $blockId, $name)
     {
         if (!Mage::helper('msp_devtools')->canInjectCode() || !$html) {
             return $html;
         }
 
-        $html = '<!-- MSPDEVTOOLS[' . $blockId . '] -->' . $html . '<!-- /MSPDEVTOOLS[' . $blockId . '] -->';
+        $html = '<!-- START_MSPDEV[' . $blockId . ']: ' . $name . ' -->' . $html
+            . '<!-- /END_MSPDEV[' . $blockId . ']: ' . $name . ' -->';
 
         return $html;
     }
@@ -104,7 +106,7 @@ class MSP_DevTools_Model_Observer
         $elementRegistry->stop($name, $payload);
 
         $html = trim($transport->getHtml());
-        $transport->setHtml($this->_injectHtmlAttribute($html, $blockId));
+        $transport->setHtml($this->_injectHtmlAttribute($html, $blockId, $name));
     }
 
     public function httpResponseSendBefore($event)

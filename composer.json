@@ -1,6 +1,5 @@
 {
   "name": "msp/devtools-m1",
-  "version": "1.0.0",
   "description": "MageSpecialist DevTools for Magento 1",
   "type": "magento-module",
   "license": "OSL 3.0",
