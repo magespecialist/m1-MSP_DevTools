@@ -1,6 +1,6 @@
 # MageSpecialist DevTools for Magento 1
 
-[![stable version](https://img.shields.io/badge/stable%20version-0.1.17-blue.svg?style=flat-square)](https://github.com/magespecialist/m1-MSP_DevTools/releases)
+[![stable version](https://img.shields.io/badge/stable%20version-1.0.0-blue.svg?style=flat-square)](https://github.com/magespecialist/m1-MSP_DevTools/releases)
 
 This module is intended to be used with **MageSpecialist Chrome Toolbar**.<br />
 Readme and installation guide can be found here: https://github.com/magespecialist/mage-chrome-toolbar
