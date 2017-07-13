@@ -26,7 +26,7 @@ class MSP_DevTools_Helper_Data extends Mage_Core_Helper_Abstract
     const XML_PATH_PHPSTORM_ENABLED = 'msp_devtools/phpstorm/enabled';
     const XML_PATH_PHPSTORM_PORT = 'msp_devtools/phpstorm/port';
 
-    const PROTOCOL_VERSION = 2;
+    const PROTOCOL_VERSION = 3;
 
     protected $_scopeConfigInterface;
     protected $_remoteAddress;
