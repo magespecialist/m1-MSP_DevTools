@@ -103,6 +103,7 @@ class MSP_DevTools_Model_Observer
         }
 
         $blockId = $elementRegistry->getOpId();
+        $payload['id'] = $blockId;
         $elementRegistry->stop($name, $payload);
 
         $html = trim($transport->getHtml());
